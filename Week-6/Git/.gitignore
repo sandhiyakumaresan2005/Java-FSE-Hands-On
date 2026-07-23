@@ -1,0 +1,9 @@
+*.orig
+*.bak
+*.backup
+*.swp
+*.tmp
+node_modules/
+dist/
+.env
+.DS_Store

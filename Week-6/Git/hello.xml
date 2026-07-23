@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<greeting>
+    <message>Hello from Master and GitWork Branch - Merged!</message>
+    <author>Naveenkumar Sivasankar</author>
+    <description>This file was resolved after merge conflict between master and GitWork branch</description>
+</greeting>

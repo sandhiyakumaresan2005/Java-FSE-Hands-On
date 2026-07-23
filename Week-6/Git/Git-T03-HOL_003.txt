@@ -1,0 +1,73 @@
+Git-T03-HOL_003: Clean Up and Push Back to Remote Git
+======================================================
+
+Objective: Execute steps involving clean up and push back to remote Git.
+
+Step 1: Verify if master is in clean state
+-------------------------------------------
+Command: git status
+
+Output:
+On branch main
+Your branch is up to date with 'origin/main'.
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Result: Master is in clean state.
+
+Step 2: List out all the available branches
+--------------------------------------------
+Command: git branch -a
+
+Output:
+* main
+  remotes/origin/main
+
+Result: Only main branch exists. All previous branches (GitNewBranch, GitWork) 
+have been deleted after merging successfully.
+
+Step 3: Pull the remote git repository to the master
+-----------------------------------------------------
+Command: git pull origin main
+
+Output:
+From https://github.com/NaveenkumarSivasankar/CTS-DEEPSKILLING
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+
+Result: Local repository is already up to date with remote.
+
+Step 4: Push the changes pending from "Git-T03-HOL_002" to the remote repository
+----------------------------------------------------------------------------------
+Command: git push origin main
+
+Output:
+To https://github.com/NaveenkumarSivasankar/CTS-DEEPSKILLING.git
+Everything up-to-date
+
+Result: All changes from HOL_002 (branching, merging, conflict resolution) 
+have been pushed to remote.
+
+Step 5: Observe if the changes are reflected in the remote repository
+----------------------------------------------------------------------
+Command: git log --oneline --graph --decorate
+
+Output:
+* 6f45ac9 (HEAD -> main, origin/main) Rename Git/GitDemo/branchfile.txt to Git/branchfile.txt
+* a2dd44f Rename Git/GitDemo/hello.xml to Git/hello.xml
+* b3385cb Added .gitignore to ignore backup files
+*   00263cb Resolved merge conflict in hello.xml between master and GitWork branch
+|\  
+| * c5570d8 Added hello.xml in GitWork branch
+* | 2a2ec66 Added hello.xml in master branch
+|/  
+* d47cd03 Added branchfile.txt in GitNewBranch
+
+Result: All changes are reflected in the remote repository. The merge history 
+shows the complete branching, conflict resolution, and cleanup workflow.
+
+Summary of Files in Git Folder:
+- welcome.txt      : Created in initial setup
+- branchfile.txt   : Created in GitNewBranch, merged to master
+- hello.xml        : Conflict resolved between master and GitWork branch
+- .gitignore       : Added to ignore backup files (*.orig, *.bak, etc.)
+- Git-T03-HOL_003.txt : This documentation file
