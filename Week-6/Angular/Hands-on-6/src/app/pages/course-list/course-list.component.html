@@ -1,0 +1,28 @@
+<section class="course-list">
+  <h2>Available Courses</h2>
+
+  <app-notification></app-notification>
+  <app-course-summary-widget></app-course-summary-widget>
+
+  <div *ngIf="isLoading; else content" class="loading-state">
+    <p>Loading courses...</p>
+  </div>
+
+  <ng-template #content>
+    <div *ngIf="courses.length > 0; else noCourses" class="courses-grid">
+      <app-course-card
+        *ngFor="let course of courses; trackBy: trackByCourseId"
+        [course]="course"
+        (enrollRequested)="onEnroll($event)">
+      </app-course-card>
+    </div>
+
+    <ng-template #noCourses>
+      <p class="no-courses">No courses available</p>
+    </ng-template>
+  </ng-template>
+
+  <p *ngIf="selectedCourseId" class="selected-course">
+    Selected Course ID: {{ selectedCourseId }}
+  </p>
+</section>

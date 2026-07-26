@@ -1,0 +1,6 @@
+<div *ngIf="notifications.length > 0" class="notification-box">
+  <h4>Portal Notifications</h4>
+  <ul>
+    <li *ngFor="let note of notifications">{{ note }}</li>
+  </ul>
+</div>

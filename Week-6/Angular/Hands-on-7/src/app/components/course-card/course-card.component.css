@@ -1,0 +1,90 @@
+.course-card {
+  background-color: #e8eaf6;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.card--enrolled {
+  background-color: #e8f5e9;
+}
+
+.card--full {
+  opacity: 0.8;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #3f51b5;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.badge--passed {
+  background-color: #4caf50;
+}
+
+.badge--failed {
+  background-color: #f44336;
+}
+
+.badge--pending {
+  background-color: #ff9800;
+}
+
+.course-card p {
+  margin: 5px 0;
+}
+
+.card-details {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card-actions button {
+  padding: 8px 16px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card-actions button:hover {
+  background-color: #303f9f;
+}
+
+.card-actions button.btn-unenroll {
+  background-color: #d32f2f;
+}
+
+.card-actions button.btn-unenroll:hover {
+  background-color: #b71c1c;
+}
+
+.card-actions button:disabled {
+  background-color: #9e9e9e;
+  cursor: not-allowed;
+}

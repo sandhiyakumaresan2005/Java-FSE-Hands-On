@@ -1,0 +1,44 @@
+<section class="course-list">
+  <h2>Available Courses</h2>
+
+  <app-notification></app-notification>
+  <app-course-summary-widget></app-course-summary-widget>
+
+  <div *ngIf="error$ | async as errorMessage" class="error-banner">
+    {{ errorMessage }}
+  </div>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [ngModel]="searchQuery"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Search courses by name or code..."
+      class="search-input"
+    />
+  </div>
+
+  <div *ngIf="isLoading$ | async; else content" class="loading-state">
+    <p>Loading courses...</p>
+  </div>
+
+  <ng-template #content>
+    <ng-container *ngIf="filteredCourses$ | async as courses">
+      <div *ngIf="courses.length > 0; else noCourses" class="courses-grid">
+        <app-course-card
+          *ngFor="let course of courses; trackBy: trackByCourseId"
+          [course]="course"
+          (enrollRequested)="onEnroll($event)">
+        </app-course-card>
+      </div>
+    </ng-container>
+
+    <ng-template #noCourses>
+      <p class="no-courses">No courses available</p>
+    </ng-template>
+  </ng-template>
+
+  <p *ngIf="selectedCourseId" class="selected-course">
+    Selected Course ID: {{ selectedCourseId }}
+  </p>
+</section>

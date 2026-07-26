@@ -1,0 +1,44 @@
+<section class="detail-container">
+  <button (click)="goBack()" class="btn btn-secondary back-btn">&larr; Back to Courses</button>
+
+  <div *ngIf="course; else notFound" class="course-detail-card">
+    <div class="header">
+      <h2>{{ course.name }}</h2>
+      <span class="code-badge">{{ course.code }}</span>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Course ID:</strong> {{ course.id }}
+      </div>
+      <div class="info-item">
+        <strong>Credits:</strong> {{ course.credits | creditLabel }}
+      </div>
+      <div class="info-item">
+        <strong>Grade Status:</strong>
+        <span class="status-badge" [class.passed]="course.gradeStatus === 'passed'" [class.failed]="course.gradeStatus === 'failed'" [class.pending]="course.gradeStatus === 'pending'">
+          {{ course.gradeStatus }}
+        </span>
+      </div>
+      <div class="info-item">
+        <strong>Enrollment Status:</strong> {{ isEnrolled ? 'Enrolled' : 'Not Enrolled' }}
+      </div>
+      <div class="info-item">
+        <strong>Capacity:</strong> {{ course.isFull ? 'Full' : 'Available' }}
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button (click)="onToggleEnroll()" [disabled]="course.isFull && !isEnrolled" [class.btn-unenroll]="isEnrolled" class="btn btn-primary">
+        {{ isEnrolled ? 'Unenroll' : 'Enroll Now' }}
+      </button>
+    </div>
+  </div>
+
+  <ng-template #notFound>
+    <div class="not-found-banner">
+      <h3>Course Not Found</h3>
+      <p>The requested course ID could not be located.</p>
+    </div>
+  </ng-template>
+</section>

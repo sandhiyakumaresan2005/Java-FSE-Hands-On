@@ -1,0 +1,29 @@
+<section class="home">
+  <h1>Welcome to {{ portalName }}</h1>
+  <p>Your one-stop platform for managing courses, tracking progress, and achieving academic excellence.</p>
+
+  <div class="statistics">
+    <div class="stat-card">
+      <h3>Courses Available</h3>
+      <p>{{ coursesAvailableCount }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Enrolled</h3>
+      <p>{{ enrolledCount }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>GPA</h3>
+      <p>3.8</p>
+    </div>
+  </div>
+
+  <div class="enroll-section">
+    <button [disabled]="!isPortalActive" (click)="onEnrollClick()">Enroll Now</button>
+    <p class="message">{{ message }}</p>
+  </div>
+
+  <div class="search-section">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search courses..." />
+    <p>Searching for: {{ searchTerm }}</p>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+<div class="course-card" [ngClass]="cardClasses" [ngStyle]="borderStyle" [appHighlight]="'#e3f2fd'">
+  <div class="card-header">
+    <h3>{{ course.name }}</h3>
+    <div [ngSwitch]="course.gradeStatus">
+      <span *ngSwitchCase="'passed'" class="badge badge--passed">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge--failed">Failed</span>
+      <span *ngSwitchCase="'pending'" class="badge badge--pending">Pending</span>
+    </div>
+  </div>
+  <p><strong>Id:</strong> {{ course.id }}</p>
+  <p><strong>Code:</strong> {{ course.code }}</p>
+  <p><strong>Credits:</strong> {{ course.credits | creditLabel }}</p>
+
+  <div *ngIf="isExpanded" class="card-details">
+    <p><strong>Status:</strong> {{ course.gradeStatus }}</p>
+    <p><strong>Enrolled:</strong> {{ (isEnrolled$ | async) ? 'Yes' : 'No' }}</p>
+    <p><strong>Capacity:</strong> {{ course.isFull ? 'Full' : 'Available' }}</p>
+  </div>
+
+  <div class="card-actions">
+    <button (click)="toggleDetails()">{{ isExpanded ? 'Hide Details' : 'Show Details' }}</button>
+    <button (click)="onToggleEnroll()" [disabled]="course.isFull && !(isEnrolled$ | async)" [class.btn-unenroll]="isEnrolled$ | async">
+      {{ (isEnrolled$ | async) ? 'Unenroll' : 'Enroll' }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<section class="enrollment-container">
+  <h2>Reactive Course Enrollment</h2>
+
+  <div *ngIf="isSubmitted" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="studentName">Student Name *</label>
+      <input
+        type="text"
+        id="studentName"
+        formControlName="studentName"
+        class="form-control"
+      />
+      <div *ngIf="enrollForm.get('studentName')?.touched && enrollForm.get('studentName')?.invalid" class="error-text">
+        <span *ngIf="enrollForm.get('studentName')?.errors?.['required']">Student Name is required.</span>
+        <span *ngIf="enrollForm.get('studentName')?.errors?.['minlength']">Student Name must be at least 3 characters.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="studentEmail">Student Email *</label>
+      <input
+        type="email"
+        id="studentEmail"
+        formControlName="studentEmail"
+        class="form-control"
+      />
+      <div *ngIf="enrollForm.get('studentEmail')?.pending" class="info-text">
+        <span>Validating email availability...</span>
+      </div>
+      <div *ngIf="enrollForm.get('studentEmail')?.touched && enrollForm.get('studentEmail')?.invalid" class="error-text">
+        <span *ngIf="enrollForm.get('studentEmail')?.errors?.['required']">Student Email is required.</span>
+        <span *ngIf="enrollForm.get('studentEmail')?.errors?.['email']">Please enter a valid email address.</span>
+        <span *ngIf="enrollForm.get('studentEmail')?.errors?.['forbiddenEmail']">Email address containing 'test@' is forbidden.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="courseId">Course ID *</label>
+      <input
+        type="text"
+        id="courseId"
+        formControlName="courseId"
+        placeholder="Enter course ID (e.g. ANG101)"
+        class="form-control"
+      />
+      <div *ngIf="enrollForm.get('courseId')?.touched && enrollForm.get('courseId')?.invalid" class="error-text">
+        <span *ngIf="enrollForm.get('courseId')?.errors?.['required']">Course ID is required.</span>
+        <span *ngIf="enrollForm.get('courseId')?.errors?.['forbiddenCourseId']">Course ID cannot begin with 'XX'.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Semester</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" formControlName="preferredSemester" value="Odd" />
+          Odd Semester
+        </label>
+        <label>
+          <input type="radio" formControlName="preferredSemester" value="Even" />
+          Even Semester
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Additional Courses</label>
+      <div formArrayName="additionalCourses" class="additional-courses-container">
+        <div *ngFor="let control of additionalCourses.controls; let i = index" class="additional-course-item">
+          <input
+            type="text"
+            [formControlName]="i"
+            placeholder="Additional course ID"
+            class="form-control"
+          />
+          <button type="button" (click)="removeAdditionalCourse(i)" class="btn btn-danger">
+            Remove
+          </button>
+        </div>
+      </div>
+      <button type="button" (click)="addAdditionalCourse()" class="btn btn-secondary add-btn">
+        + Add Another Course
+      </button>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" formControlName="agreeToTerms" />
+        I agree to the terms and conditions *
+      </label>
+      <div *ngIf="enrollForm.get('agreeToTerms')?.touched && enrollForm.get('agreeToTerms')?.invalid" class="error-text">
+        <span>You must agree to the terms and conditions.</span>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" [disabled]="enrollForm.invalid || enrollForm.pending" class="btn btn-primary">
+        Submit Enrollment
+      </button>
+      <button type="button" (click)="onReset()" class="btn btn-secondary">
+        Reset
+      </button>
+    </div>
+  </form>
+</section>

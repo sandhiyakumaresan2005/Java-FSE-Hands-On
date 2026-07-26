@@ -1,0 +1,24 @@
+.notification-box {
+  background-color: #fff8e1;
+  border-left: 6px solid #ffa000;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin: 15px auto;
+  max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.notification-box h4 {
+  margin: 0 0 8px 0;
+  color: #ff6f00;
+}
+
+.notification-box ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #5d4037;
+}
+
+.notification-box li {
+  margin-bottom: 4px;
+}

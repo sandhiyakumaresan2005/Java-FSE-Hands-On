@@ -1,0 +1,26 @@
+<section class="profile-container">
+  <div class="profile-card">
+    <h2>Student Profile</h2>
+    <p><strong>Name:</strong> {{ student.name }}</p>
+    <p><strong>Student ID:</strong> {{ student.studentId }}</p>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>Major:</strong> {{ student.major }}</p>
+    <p><strong>GPA:</strong> {{ student.gpa }}</p>
+  </div>
+
+  <div class="enrolled-courses-section">
+    <h3>Enrolled Courses</h3>
+    <div *ngIf="enrolledCourses.length > 0; else noEnrolled" class="enrolled-list">
+      <div *ngFor="let course of enrolledCourses" class="enrolled-item">
+        <div>
+          <h4>{{ course.name }} ({{ course.code }})</h4>
+          <p>Credits: {{ course.credits | creditLabel }} | Status: {{ course.gradeStatus }}</p>
+        </div>
+        <button (click)="unenroll(course.id)" class="btn btn-unenroll">Unenroll</button>
+      </div>
+    </div>
+    <ng-template #noEnrolled>
+      <p class="empty-msg">No courses currently enrolled.</p>
+    </ng-template>
+  </div>
+</section>
